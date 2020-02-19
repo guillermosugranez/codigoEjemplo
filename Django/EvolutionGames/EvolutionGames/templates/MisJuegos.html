@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block Header %}
+	<h1>Mis Juegos</h1>
+{% endblock %}
+
+{% block Contents %}
+	
+	<div class="container-fluid table-responsive">
+		<table id="juegos" class="table table-striped table-hover">
+			<thead>
+				<tr>
+					<th>Juego</th>
+					<th></th>
+					<th>Accion</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for dato in datos %}
+				<tr>
+					<td><!--Titulo-->
+						{{dato.titulo}}
+					</td>
+
+					<td><!--Editar-->
+						<p><a class="btn btn-lg btn-primary" href="/juego/editar/{{dato.id}}/" role="button">Editar</a></p>
+					</td>
+
+					<td><!--eliminar-->
+						<p><a class="btn btn-lg btn-primary" href="/juego/eliminar/{{dato.id}}/" role="button">Eliminar</a></p>
+					</td>
+
+					<td><!--Ver-->
+						<p><a class="btn btn-lg btn-primary" href="/juego/{{dato.id}}/" role="button">Ver</a></p>
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+	
+{% endblock %}

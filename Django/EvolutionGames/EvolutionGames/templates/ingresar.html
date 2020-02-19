@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block Header %} 
+	<h1>Ingresa</h1>
+{% endblock %}
+
+{% block Contents %}
+	<div class="container-fluid">
+		<form id='formulario' method='post' action=''>{% csrf_token %}
+			<table>{{formulario}}</table>
+			<p><input type='submit' value='Ingresar'/></p>
+		</form>
+		
+	</div>
+{% endblock %}

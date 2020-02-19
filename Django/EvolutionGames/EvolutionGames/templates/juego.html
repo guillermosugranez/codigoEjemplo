@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block Header %}
+	<h1>{{juego.titulo|title}}</h1>
+	<p1>{{juego.descripcion}}</p1>
+{% endblock %}
+
+{% block Contents %}
+	
+	<div class="container-fluid ">
+		<img align=center src='{{MEDIA_URL}}{{juego.imagen}}' class="img-thumbnail">
+	</div>
+
+	<br>
+
+	<div class="container-fluid table-responsive">
+		<table id="juego" class="table table-striped table-bordered table-bordered table-hover">
+			<thead>
+				<tr>
+					<th>Clase</th>
+					<th>Detalle</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr>
+					<td>Fecha de subida: </td><td>{{juego.tiempo_registro}}</td>
+				</tr>
+
+				<tr>
+					<td>Puntuación: </td><td>{{juego.estrellas}}</td>
+				</tr>
+
+				<tr>
+					<td>Etiquetas: </td>
+					<td>
+						<div>
+						    {% for etiquetas in juego.etiquetas.all%}
+								{{ etiquetas.nombre }} 
+							{% empty %}
+								Sin etiquetas registradas
+							{% endfor %}
+
+						</div>
+					</td>
+				</tr>
+
+				<tr>
+					<td>Subido por: </td><td>{{juego.usuario}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<br>
+
+	<div>
+		<ul>
+			{% for comentario in comentario %}
+				<li>{{ comentario.tiempo_registro }} - {{ comentario.autor }}</li>
+				<ul>
+					<li>{{ comentario.texto|linebreaks }}</li>
+				</ul>
+				
+			{% endfor %}
+		</ul>
+	</div>
+
+	<!--Formulario comenta-->
+	<div>
+		<form action="{% url 'principal.views.poncomentario' juego.id %}" method="POST">
+		{% csrf_token %}
+			<p>Mensaje: {{ form.texto }}</p>
+			<p><input type="submit" value="Enviar"></p>
+		</form>
+	</div>
+
+	<!--Link del juego-->
+	<div>
+
+	</div>
+
+	<br>
+{% endblock %}
+
+
+		
